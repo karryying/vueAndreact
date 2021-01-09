@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+    <style>
+        .box{
+            width: 80%;
+            margin: 20px auto;
+            border: 2px solid orange;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <hello></hello>
+        <h2>123</h2>
+        <hello></hello>
+        <hi></hi>
+    </div>
+    <hr>
+    <div id="app2">
+        <!-- 错误案例 -->
+        <!-- <hello></hello> -->
+        <hi></hi>
+    </div>
+    <script>
+        // 全局注册
+        Vue.component("hi",{
+            template:"<div>hi</div>"
+        })
+
+        let vm = new Vue({
+            el: "#app",//挂载点
+            data: {//属性
+
+            },
+            //局部注册
+            components:{
+                hello:{
+                    template:"<div class='box'><h2>这是网站导航</h2><p>这是网站导航内容</p><hi></hi></div>"
+                }
+            }
+        })
+
+        new Vue({
+            el:"#app2",
+        })
+    </script>
+</body>
+
+</html>

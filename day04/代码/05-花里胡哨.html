@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/animate.css">
+    <script src="./js/vue.js"></script>
+    <style>
+        .box {
+            width: 900px;
+            font-size: 16px;
+            border: 2px solid orange;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="isshow=true">选项1</button>
+        <button @click="isshow=false">选项2</button>
+
+        <transition
+        enter-active-class="animate__animated animate__flipInX"
+        >
+            <div class="box" v-if="isshow">
+                中国国家统计局12月10日发布数据，2020年全国粮食总产量为13390亿斤，比上年增加113亿斤，增长0.9%，连续6年保持在1.3万亿斤以上，实现“十七连丰”。泰国正大管理学院中国东盟研究中心副主任奥拉萨表示，中国粮食再获丰收体现了统筹疫情防控和经济社会发展取得重大战略成果，中国为维护全球粮食安全作出了重要贡献。
+
+                　　稳步发展农业 参与全球治理
+
+                　　近年来，中国农业结构不断优化，区域布局趋于合理，粮食生产连年丰收。中国利用全球9%的耕地，解决了全球近20%人口的吃饭问题。“中国政府多措并举，在应对粮食安全挑战方面为各国树立了典范。”联合国粮农组织首席经济学家马克西莫·托雷罗表示，“抗击疫情期间，中国调动各方资源，保证粮油肉菜等生活物资供应，有效缓解了疫情冲击。目前，中国在粮食安全和粮食生产方面取得巨大飞跃，谷物库存水平很高。”
+            </div>
+           
+        </transition>
+        <transition
+        enter-active-class="animate__animated animate__flipInX"
+        >
+            <div class="box" v-if="!isshow">
+                中国高度重视粮食安全，主张各方携手努力，共同维护全球粮食安全。今年11月，习近平主席出席二十国集团领导人第十五次峰会第一阶段会议并发表重要讲话指出，中方支持联合国明年举办世界粮食峰会，倡议适时召开国际粮食减损大会。
+
+                　　新冠肺炎疫情对全球粮食安全造成负面影响。据联合国发布的《世界粮食安全和营养状况》报告显示，疫情可能导致全世界食物不足人数今年新增8300万至1.32亿。联合国粮农组织水产养殖处处长马赛厄斯·哈洛特表示，中方立场和举措为维护全球粮食安全提供了中国方案，为各国保障粮食安全注入了信心和动力。
+
+                　　联合国粮农组织理事会第165届会议近日通过视频方式举办。时任中国常驻联合国粮农机构代表牛盾在会上表示，中国是南南与三方合作的坚定支持者、参与者和贡献者，我们愿意分享我们的经验和实践，与粮农组织和其他成员国一道，共同努力，帮助发展中国家消除贫困，解决饥饿问题。他强调，中方支持召开联合国粮食峰会，支持粮农组织在峰会筹备、召开及后续活动中发挥重要作用，共同推动粮食系统转型变革。中方鼓励粮农组织不断完善相关措施，继续做好疫情应对工作，特别是要帮助发展中成员不断加强粮食体系的韧性和抵御力。
+            </div>
+        </transition>
+    </div>
+    <script>
+        let vm = new Vue({
+            el: "#app",//挂载点
+            data: {//属性
+                isshow: true
+            },
+            methods: {//方法
+
+            },
+            filters: {//过滤器
+
+            },
+            watch: {//监听
+
+            },
+            computed: {//计算属性
+
+            },
+            mounted() {//挂载完成
+
+            }
+        })
+    </script>
+</body>
+
+</html>

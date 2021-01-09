@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text">
+    <ul>
+        
+    </ul>
+    <script>
+        // http://suggestion.baidu.com/su?cb=callback&wd=123
+
+        let input = document.querySelector("input")
+        let ul = document.querySelector("ul")
+        input.oninput = () => {
+            //发请求
+            let os=document.createElement("script")
+            os.src="http://suggestion.baidu.com/su?cb=asd&wd="+input.value
+            document.body.appendChild(os)
+        }
+        function asd(res){
+            console.log(res);
+            let arr=res.s;
+            ul.innerHTML=""
+            for(let i=0;i<arr.length;i++){
+                let li=document.createElement("li")
+                li.innerHTML=arr[i]
+                ul.appendChild(li)
+            }
+        }
+    </script>
+</body>
+
+</html>

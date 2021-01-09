@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h3>{{json}}</h3>
+        <button @click="json.x=20">x-20</button>
+        <button @click="addY">add y </button>
+        <button @click="y50">y-50</button>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                json:{
+                    x:10,
+                    name:"tiezhu",
+                    age:20
+                }
+            },
+            methods:{
+                addY(){
+
+                   
+
+
+                    // this.json.y=30
+                    // console.log(this.json);
+
+                    // 1.Vue.set(this.json,'y',30)
+                    //2. this.$set(this.json,'y',30)
+                    // console.log(this.json);
+
+                    // 3.拷贝
+                    this.json={
+                        ...this.json,
+                        y:30
+                    }
+                    console.log(this.json);
+                },
+                y50(){
+                    this.json.y=50
+                }
+            },
+            filters:{}
+        })
+    </script>
+</body>
+</html>

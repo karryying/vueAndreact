@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <website-nav></website-nav>
+        <website-nav></website-nav>
+        <v-one></v-one>
+    </div>
+    <script>
+        let vm = new Vue({
+            el: "#app",//挂载点
+            data: {//属性
+
+            },
+            components: {
+                // 1.不能以已经存在的标签命名 eg:div ul li ...
+                // 2.不能以已经存在的标签的大写命名 eg:DIV,P
+                // 3.组件名称中间如果包含了大写字母，那么调用的时候需要改成 -小写。烤串写法
+                WebsiteNav: {
+                    template: `
+                        <div>
+                            <h3>网站导航</h3>
+                        </div>
+                    `
+                },
+                // 4.建议：组件命名的时候，包含 一个大写字母，方便调用
+                vOne: {
+                    template: `
+                        <div>
+                            <h3>one one</h3>
+                        </div>
+                    `
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

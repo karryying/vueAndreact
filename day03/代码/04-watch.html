@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>name:{{name}}</h1>
+        <input type="text" v-model="name">
+        <button @click="name='小花'">小花</button>
+        <h2>案例1</h2>
+        <div>你可以提问一个 用 yes或者no回答的问题：</div>
+        <input type="text" v-model="question">
+        <div>答案：{{answer}}</div>
+
+        <input type="text" v-model="json.name" >
+        <h3>{{json.name}}</h3>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                name:"铁柱",
+                question:"",
+                answer:"",
+                json:{
+                    name:"丫蛋"
+                }
+            },
+            methods:{
+                changeJ(){
+                    console.log("json.name");
+                }
+            },
+            filters:{},
+            //只能监听data中的数据
+            watch:{
+                /*name(newV,oldV){
+                    console.log("name 变了");
+                    console.log(newV,oldV);
+                },*/
+                name:{
+                    handler(){
+                        console.log("name变了");
+                    },
+                    deep:false
+                },
+                question(){
+                    if(this.question.indexOf("?")!=-1||this.question.includes("？")){
+                        this.answer=Math.random()<0.5?'YES':'NO'
+                    }else{
+                        this.answer=""
+                    }
+                },
+                //深度监听
+                json:{
+                    handler(){
+                        console.log("json变了");
+                    },
+                    deep:true
+                }
+            }
+        })
+    </script>
+</body>
+</html>

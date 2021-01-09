@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h3>{{name}}</h3>
+        <input type="text" v-model="name">
+        <button @click="name='杨玉环'">杨玉环</button>
+        <ul>
+            <li v-for="item in arr" :key="item">{{item}}</li>
+        </ul>
+        <div>当前时间：{{date.toLocaleTimeString()}}</div>
+
+        <h2>{{age}}</h2>
+        <button @click="changeAge">age-50</button>
+        <button class="btn">挂载</button>
+    </div>
+    <script>
+
+        //data 里面的数据发生了改变，才会引起beforeUpdate和updated 的执行，页面才会重新渲染
+        //为了避免一些不必要的渲染，页面不用到的变量，就不要在data中声明
+        let vv = new Vue({
+            
+            data: {
+                name: "妲己",
+                arr: ["物美价廉", "很好", "童叟无欺"],
+                date: new Date()
+            },
+            methods: {
+                changeAge(){
+                    this.age=50
+                    console.log(this.$data);
+                    console.log(this.age);
+                }
+            },
+            filters: {},
+            //生命周期 有8个函数，自动执行，这种函数叫：钩子函数
+
+            //创建之前：什么都是undefined
+            beforeCreate() {
+                console.group("创建之前")
+                console.log("el:", this.$el);
+                console.log("data:", this.$data);
+                console.log("name:", this.name);
+                console.groupEnd()
+            },
+            //创建完成：vue实例创建完成，此时，数据已经有了，但是el还是undefined
+            created() {
+                console.group("创建完成")
+                console.log("el:", this.$el);
+                console.log("data:", this.$data);
+                console.log("name:", this.name);
+                this.name = "王昭君"
+                console.groupEnd()
+
+                this.age=30;
+            },
+            //有el才会执行挂载期
+            //挂载之前：找到el挂载点，但是 {{}}，v-for 都还没有解析
+            beforeMount() {
+                console.group("挂载之前")
+                console.log("el:", this.$el);
+                console.log("data:", this.$data);
+                console.log("name:", this.name);
+                console.groupEnd()
+            },
+            //挂载完成：vue渲染到页面，节点加载完成,开启计时器、ajax、window|document 绑定事件
+            mounted() {
+                console.group("挂载完成")
+                console.log("el:", this.$el);
+                console.log("data:", this.$data);
+                console.log("name:", this.name);
+                console.groupEnd()
+                
+                // this.time=setInterval(()=> {
+                //     this.date = new Date()
+                // }, 1000)
+                /*window.onscroll=()=>{
+                    if(){
+                        //ajax
+                    }
+                }*/
+            },
+            //更新之前：页面重新渲染之前，取到的值是新值
+            beforeUpdate() {
+                console.group("更新之前")
+                console.log(this.name);
+                console.groupEnd()
+            },
+            //页面重新渲染完成
+            updated() {
+                console.group("更新之后")
+                console.log(this.name);
+                console.groupEnd()
+            },
+            //卸载之前:善后工作 ：清除window|document事件、清除计时器
+            beforeDestroy() {
+                console.group("卸载之前")
+                console.groupEnd()
+                window.onscroll=null;
+                clearInterval(this.time)
+            },
+            //卸载之后
+            destroyed() {
+                console.group("卸载之后")
+                console.groupEnd()
+            }
+        })
+        let button = document.querySelector(".btn")
+        button.onclick = () => {
+            //vue挂载
+            vv.$mount("#app")
+        }
+    </script>
+</body>
+
+</html>

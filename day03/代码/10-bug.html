@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="(item,index) in d" :key="item.id">
+                <h3>{{item.name}}</h3>
+                <p>{{item.age}}</p>
+                <button @click="add(index)">+</button>
+            </li>
+        </ul>
+    </div>
+    <script>
+        let arr=[
+            {id:1,name:"哈哈哈"},
+            {id:2,name:"嘻嘻嘻"},
+            {id:3,name:"嘿嘿嘿"}
+        ]
+        new Vue({
+            el:"#app",
+            data:{
+                d:[]
+            },
+            
+            mounted(){
+                this.d=arr;
+                this.d.forEach(item=>{
+                    item.age=10
+                })
+            },
+            methods:{
+                add(index){
+                    //bug:对于后来添加的属性，修改了，页面是不会重新渲染的
+                    // this.d[index].age++
+                   
+                   //1.取 2.做 3.放
+                   let obj=this.d[index]
+                   obj.age++;
+                   
+                   //一、arr.splice(index,1,newV)
+                   //this.d.splice(index,1,obj)
+
+                   //二、Vue.set(arr,index,newV)
+                   //Vue.set(this.d,index,obj)
+                   
+                   //三、Vue.set(arr,index,newV)
+                   this.$set(this.d,index,obj)
+                
+                }
+            }
+        })
+    </script>
+</body>
+</html>

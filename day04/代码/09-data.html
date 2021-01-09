@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+    <style>
+        .box {
+            width: 80%;
+            margin: 20px auto;
+            border: 2px solid orange;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <p>age:{{age}}</p>
+        <button @click="isshow=!isshow">切换</button>
+
+        
+        <!-- 如果组件上绑定了v-if，切换会引起生命周期的重新执行；v-show不会 -->
+        <v-one v-if="isshow"></v-one>
+        <v-one></v-one>
+        <v-one></v-one>
+    </div>
+    <template id="one">
+        <div class="box">
+            <h2>this is one</h2>
+            <p>name:{{name}}</p>
+            <input type="text" v-model="name">
+            <button @click="name='王昭君'">王昭君</button>
+            <h3>price:{{price|filterPrice}}</h3>
+        </div>
+    </template>
+    <script>
+        Vue.filter("filterPrice",(p)=>{
+            return p.toFixed(2)
+        })
+        let vm = new Vue({
+            el: "#app",//挂载点
+            data(){
+                return {
+                    age:20,
+                    isshow:true
+                }
+            },
+            components: {
+                vOne: {
+                    template: "#one",
+                    // 1.组件中的data是一个返回对象的函数
+                    // 2.为什么data是一个函数？组件是可复用的vue实例,我们希望模板一样，数据隔离，如果data定义为一个json,json是引用类型，
+                    // 就会一变全变，这样是不合理的。如果data定义为一个函数，函数是作用域空间，这样的话，每个组件的数据是相互隔离的。
+                    data() {
+                        return {
+                            name: "妲己",
+                            price:20
+                        }
+                    },
+                    mounted(){
+                        console.log("mounted");
+                    },
+                    beforeDestroy(){
+                        console.log("before destroy");
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

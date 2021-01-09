@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+</head>
+
+<body>
+   <!--
+    jq:操作DOM节点，链式操作
+    模型：model-M
+    视图：view  -V
+    视图模型（控制器）：viewModel -VM
+     -->
+    <!-- 
+        MVVM：M-model(模型-数据) V-view(视图-浏览器) VM-viewModel(视图模型-控制器)
+        模型通过视图模型决定视图，视图通过视图模型可以修改模型，视图模型是视图和模型之前的桥梁。
+        
+        当一个项目，数据操作比较多的情况下，我们应该采用MVVM模式的框架，动画或者DOM节点操作比较多，应该使用JQ。
+    -->
+    <!-- 视图 -->
+    <div id="app">
+        <h1>name:{{name}}</h1>
+        <input type="text" v-model="name">
+        <button @click="changeName('王昭君')">王昭君</button>
+    </div>
+    <script>
+        let vm = new Vue({
+            el: "#app",//挂载点
+            data: {//属性 模型
+                name: "妲己22"
+            },
+            methods: {//方法
+                changeName(name) {
+                    this.name = name;
+                }
+            },
+            filters: {//过滤器
+
+            },
+            watch: {//监听
+
+            },
+            computed: {//计算属性
+
+            },
+            mounted() {//挂载完成
+
+            }
+        })
+    </script>
+</body>
+
+</html>

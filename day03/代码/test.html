@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        　<my-component v-on:click.native="clickFun"></my-component>
+    </div>
+
+    <script>
+        Vue.component('my-component', {
+            template: `<div href='#'>click me</div>`
+        })
+        new Vue({
+            el: '#app',
+            methods: {
+                clickFun: function () {
+                    console.log("message: success")
+                }
+            }
+        })
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="./js/vue.js"></script>
+    <style>
+        .select {
+            background: #333333;
+            color: #ffffff;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="kw" @keydown.down="down"
+        @keydown.up.prevent="up"
+        @keydown.enter="enter"
+        >
+        <ul>
+            <li v-for="(item,index) in arr" :key="item" :class="[index===n?'select':'']">{{item}}</li>
+        </ul>
+    </div>
+    <script>
+        // http://suggestion.baidu.com/su?cb=callback&wd=123
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                kw: "",
+                arr: [],
+                n: -1
+            },
+            watch: {
+                kw() {
+                    if (this.kw === '') {
+                        this.arr = []
+                        return;
+                    }
+                    //发请求
+                    let os = document.createElement("script")
+                    os.src = "http://suggestion.baidu.com/su?cb=callback&wd=" + this.kw
+                    document.body.appendChild(os)
+                }
+            },
+            methods: {
+                //下键
+                down() {
+                    this.n++
+                    if (this.n >= 4) {
+                        this.n = -1
+                    }
+                },
+                //上键
+                up(){
+                    this.n--
+                    if(this.n<=-1){
+                        this.n=4
+                    }
+                },
+                //回车
+                enter(){
+                    if(this.n>=0&&this.n<=3){
+                        window.open("https://www.baidu.com/s?wd="+this.arr[this.n],"_self")
+                    }else{
+                        window.open("https://www.baidu.com/s?wd="+this.kw,"_self")
+                    }
+                    
+                }
+            }
+        })
+        function callback(d) {
+            console.log(d);
+            //    vm.arr= d.s.filter((item,index)=>index<4)
+            vm.arr = d.s.slice(0, 4)
+        }
+    </script>
+</body>
+
+</html>

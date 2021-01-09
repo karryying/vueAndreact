@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <textarea cols="30" rows="10" v-model="kw"></textarea>
+        <div>翻译结果：{{result}}</div>
+    </div>
+    <script>
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                kw: "",
+                result: ""
+            },
+            watch: {
+                kw() {
+                    if(this.kw===""){
+                        this.result=""
+                        return;
+                    }
+                    //发请求
+                    let os = document.createElement("script")
+                    os.src = "https://api.asilu.com/fanyi?type=&_1501665233671&q=" + this.kw + "&callback=cc"
+                    document.body.appendChild(os)
+                }
+            }
+        })
+        function cc(res) {
+            console.log(res);
+            vm.result =res.data
+        }
+    </script>
+</body>
+
+</html>

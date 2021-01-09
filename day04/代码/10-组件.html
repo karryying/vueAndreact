@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+    <style>
+        .box {
+            width: 80%;
+            margin: 20px auto;
+            border: 2px solid orange;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h1>price:{{price}}</h1>
+        <hello></hello>
+        <v-one>12312321</v-one>
+
+    </div>
+
+    <template id="one">
+        <div class="box">
+            <h1>this is one</h1>
+            <p>name:{{name}}</p>
+             <!-- price是会报错的 -->
+            <!-- <p>price:{{price}}</p> -->
+            <v-two></v-two>
+        </div>
+    </template>
+    <template id="two">
+        <div class="box">
+            <h1>this is two</h1>
+            <hello></hello>
+        </div>
+    </template>
+    <script>
+        Vue.component("hello",{
+            template:"<div>hello</div>"
+        })
+        // 一个组件只能使用自己的data、methods、computed 、components...
+        let vm = new Vue({
+            el: "#app",//挂载点
+            data: {//属性
+                price:20
+            },
+            components: {
+                vOne: {
+                    template: "#one",
+                    data() {
+                        return {
+                            name: "妲己"
+                        }
+                    },
+                    methods: {},
+                    watch: {},
+                    filters: {},
+                    components: {
+                        vTwo: {
+                            template: "#two",
+                            
+                        }
+                    }
+                },
+
+            }
+        })
+    </script>
+</body>
+
+</html>

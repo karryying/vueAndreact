@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+    <style>
+        .mask {
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+
+        .con {
+            width: 400px;
+            padding: 20px;
+            border-radius: 20px;
+            background: #ffffff;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        /* 进来之前 */
+        .mask-enter{
+            left: -100vw;
+            opacity: 0.1;
+        }
+        /* 进来过程 */
+        .mask-enter-active,.mask-leave-active{
+            transition: all 0.5s;
+        }
+        /* 进来完成 */
+        .mask-enter-to{
+            left: 0px;
+            opacity: 1;
+        }
+        /* 离开之前 */
+        .mask-leave{
+            top: 0;
+            opacity: 1;
+        }
+        /* 离开完成 */
+        .mask-leave-to{
+            top: 100vh;
+            opacity: 0.1;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="isshow=true">删除</button>
+        <transition name="mask">
+            <div class="mask" v-show="isshow" @click.self="cancel">
+                <div class="con">
+                    <h3>你确定要删除吗？</h3>
+                    <button @click="cancel">取消</button>
+                    <button>确定</button>
+                </div>
+            </div>
+        </transition>
+    </div>
+    <script>
+        let vm = new Vue({
+            el: "#app",//挂载点
+            data: {//属性
+                isshow: false
+            },
+            methods: {//方法
+                cancel() {
+                    this.isshow = false;
+                }
+            },
+            filters: {//过滤器
+
+            },
+            watch: {//监听
+
+            },
+            computed: {//计算属性
+
+            },
+            mounted() {//挂载完成
+
+            }
+        })
+    </script>
+</body>
+
+</html>

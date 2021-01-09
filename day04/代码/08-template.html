@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <v-one></v-one>
+        <v-two></v-two>
+        <v-three></v-three>
+    </div>
+    <template id="two">
+        <div>
+            <h3>this is two</h3>
+        </div>
+    </template>
+    <template id="three">
+        <div>
+            <h3>this is three</h3>
+            <p>this is three con</p>
+        </div>
+    </template>
+    <script>
+        let vm = new Vue({
+            el: "#app",//挂载点
+            data: {//属性
+
+            },
+            components: {
+                vOne: {
+                    template: "<div>这是one</div>",
+                    mounted() {
+                        console.log("mounted");
+                    }
+                },
+                vTwo: {
+                    // 1.可以借助template 标签来定义template选项
+                    template: "#two"
+                },
+                vThree: {
+                    // 2.template只能有一个根节点，因为如果有好几个节点，vue实例也只能作用在第一个上。
+                    template: "#three"
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
