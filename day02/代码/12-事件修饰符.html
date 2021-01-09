@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            border: 2px solid rebeccapurple;
+            margin: 20px auto;
+        }
+
+        .outer {
+            width: 300px;
+            height: 300px;
+            background: pink;
+            margin: 20px auto;
+        }
+
+        .mask {
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+
+        .con {
+            width: 380px;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 20px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 1. .prevent 阻止默认事件 -->
+        <div class="box" @contextmenu.prevent="yj"></div>
+
+        <!-- 2. .stop 阻止传播 -->
+        <div class="outer" @click="outerClick">
+            <div class="box" @click.stop="innerClick">冒泡</div>
+        </div>
+
+        <!-- 3..capture 捕获事件 -->
+        <div class="outer" @click.capture.stop="outerClick">
+            <div class="box" @click.capture="innerClick">捕获</div>
+        </div>
+
+
+        <!-- 阻止传播 -->
+        <button @click="isDel=true">删除</button>
+        <div class="mask" v-show="isDel" @click="isDel=false">
+            <div class="con" @click.stop="conClick">
+                <h3>你确定要删除吗？</h3>
+                <button>确定</button>
+                <button @click="isDel=false">取消</button>
+            </div>
+        </div>
+
+        <!--4 .self 触发的目标元素是自己，才触发 -->
+        <button @click="isDel2=true">删除2</button>
+        <div class="mask" v-show="isDel2" @click.self="isDel2=false">
+            <div class="con">
+                <h3>你确定要删除吗2？</h3>
+                <button>确定2</button>
+                <button @click="isDel2=false">取消2</button>
+            </div>
+        </div>
+
+        <!-- 5.  .enter .left .right .up .down .65-->
+
+        <input type="text" @keydown.enter="enter" @keydown.up.prevent="up"
+        @keydown.down="down"
+        @keydown.left="left"
+        @keydown.right="right"
+        @keydown.65="aa"
+        >
+
+
+        <!-- 6. .native  给组件绑定原生事件，绑不上，使用.native解决-->
+        <!-- <Hello @click.native="fn"></Hello> -->
+    </div>
+    <script>
+        new Vue({
+            el: "#app",//挂载点
+            data: {//属性
+                isDel: false,
+                isDel2:false
+            },
+            methods: {//方法
+                //右键
+                yj() {
+                    console.log("右键了");
+                },
+                outerClick() {
+                    console.log("outer click");
+                },
+                innerClick() {
+                    console.log("inner click");
+                },
+                conClick(){},
+                //回车
+                enter(){
+                    console.log("enter");
+                    window.open("http://ujiuye.com","_self")
+                },
+                up(){
+                    console.log("up");
+                },
+                down(){
+                    console.log("down");
+                },
+                left(){
+                    console.log("left");
+                },
+                right(){
+                    console.log("right");
+                },
+                aa(){
+                    console.log("aaaaa");
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

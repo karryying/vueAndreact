@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./node_modules/_vue@2.6.12@vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <!-- 1.画了静态页面 -->
+    <div id="app">
+        <h3>输入表</h3>
+        <!-- 6.通过v-model绑定到input  -->
+        <div>姓名：<input type="text" v-model="name"></div>
+        <div>年龄：<input type="text" v-model="age"></div>
+        <div>
+            <button @click="add()">添加</button>
+            <button @click="reset()">重置</button>
+        </div>
+
+        <h3>信息表</h3>
+        <table width="600" border="1">
+
+            <tr>
+                <th>序号</th>
+                <th>姓名</th>
+                <th>年龄</th>
+                <th>操作</th>
+            </tr>
+            <!-- 3.遍历数据 list -->
+            <tr v-for="(item,index) in list">
+                <td>{{index+1}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.age}}</td>
+                <td>
+                    <button @click="del(index)">删除</button>
+                </td>
+            </tr>
+            <!-- 4.条件渲染"暂无数据"和"全部删除" -->
+            <tr v-if="list.length==0">
+                <td colspan="4">暂无数据</td>
+            </tr>
+            <tr v-else>
+                <td colspan="4">
+                    <button @click="delAll()">全部删除</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                // 2.数据的初始值
+                list: [
+                    // {name:"zs",age:20},
+                    // {name:"ls",age:30}
+                ],
+                // 5.输入框中的内容
+                name: "",
+                age: ""
+            },
+            methods: {
+                // 7.添加
+                add() {
+                    this.list.push({
+                        name: this.name,
+                        age: this.age
+                    })
+                    //数据重置
+                    this.reset()
+                },
+                //8.重置
+                reset() {
+                    this.name = ""
+                    this.age = ""
+                },
+                //9.删除
+                del(n) {
+                    this.list.splice(n, 1)
+                },
+                //10.全部删除
+                delAll() {
+                    this.list = []
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

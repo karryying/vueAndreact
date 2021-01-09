@@ -1,0 +1,13 @@
+﻿一级分类 first_cateid eg:1   选项：家用电器-0、美妆护肤-1、电子产品-2  
+二级分类 second_cateid eg:"精华"   选项：精华-精华、爽肤水-爽肤水、美容仪-美容仪
+商品名称 goodsname  eg:"SK2神仙水"
+价格    price       eg:"999"
+市场价格 market_price eg:"1099"
+商品规格 specsid    eg:"0"  选项：颜色-"0" 大小-"1" 尺寸-"2" 
+商品属性 specsattr  eg:["红色","黄色"]   选项：红色-红色，黄色-黄色 绿色-绿色
+是否新品 isnew      eg:"1"   选项：是-"1" 否-"0" 
+是否热卖 ishot      eg:"1"   选项：是-"1" 否-"0"  
+状态    status      eg:true  选项：开-true 关-false
+                
+                
+               

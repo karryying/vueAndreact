@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-if</title>
+    <script src="./node_modules/_vue@2.6.12@vue/dist/vue.js"></script>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background: green;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- v-if="值" 值是true，出现，false,消失。 -->
+        <hr>
+        <h3 v-if="true">祝你顺风顺手顺财神</h3>
+        <h3 v-if="-1">祝你朝朝暮暮有人疼</h3>
+        <hr>
+        <div v-if="comments.length>0">{{comments}}</div>
+        <div v-if="comments.length==0">暂无评价</div>
+        <hr>
+        <!-- v-else 需要和v-if 挨着 -->
+        <div v-if="comments.length>0">{{comments}}</div>
+        <div v-else>暂无评价</div>
+
+        <hr>
+        <button v-on:click="qiehuan()">切换</button>
+        <div class="box" v-if="isshow"></div>
+    </div>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                comments: ["物美价廉", "很好", "推荐"],
+                isshow: true
+            },
+            methods: {
+                qiehuan: function () {
+                    /*
+                   if(this.isshow){
+                       this.isshow=false;
+                   }else{
+                       this.isshow=true;
+                   }*/
+                    this.isshow = !this.isshow;
+                }
+            }
+        })
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+    <style>
+        .red {
+            color: red;
+        }
+
+        .blue {
+            color: blue;
+        }
+
+        .purple {
+            color: purple;
+        }
+
+        .yellow {
+            background: yellow;
+        }
+
+        .gray {
+            background: #ccc;
+        }
+
+        .lime {
+            background: lime;
+        }
+
+        .movie {
+            width: 600px;
+            height: 300px;
+            margin: 20px auto;
+        }
+
+        img {
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="changec('red')">red</button>
+        <button @click="changec('blue')">blue</button>
+        <!-- 1.:class="变量" 几乎不用 -->
+        <div :class="class1">从前有座山，山里有座庙，庙里有个老和尚，长得真是俏！</div>
+
+        <!-- 2.:class="[条件?'类名1':'类名2']"  只能有2中情景 -->
+        <button @click="qiehuan()">切换</button>
+        <div :class="[isRed?'red gray':'blue gray']">俏也争春，只把春来报，待到山花浪漫时，他在丛中笑！</div>
+
+        <!-- 案例
+        0-yellow 1-gray 2-yellow 3-gray 4-yellow 5-gray ... -->
+        <div class="movie" v-for="(item,index) in movies" :key="item.id" :class="[index%2==0?'yellow':'gray']">
+            <h3>名称：{{item.name}}</h3>
+            <img :src="item.img" alt="">
+            <p>导演：
+                <span v-for="i in item.director" :key="i.id">{{i.name}}&nbsp;&nbsp;</span>
+            </p>
+            <p>主演：
+                <span v-for="i in item.actors" :key="i.id">{{i.name}}&nbsp;&nbsp;</span>
+            </p>
+        </div>
+
+        <!-- 3.:class="{类名1:true,类名2:false}" -->
+        <div :class="{red:true,blue:false,yellow:1==1,lime:1}">天道酬勤，人道酬善，商道酬信！</div>
+        <!-- 案例 3个一循环
+            0-yellow 1-gray 2-lime 3-yellow 4-gray 5-lime 6-yellow ...
+        yellow:index%3===0
+        gray:index%3===1
+        lime:index%3===2
+        -->
+        <div class="movie" v-for="(item,index) in movies" :key="item.id"
+            :class="{yellow:index%3===0,gray:index%3===1,lime:index%3===2}">
+            <h3>名称：{{item.name}}</h3>
+            <img :src="item.img" alt="">
+            <p>导演：
+                <span v-for="i in item.director" :key="i.id">{{i.name}}&nbsp;&nbsp;</span>
+            </p>
+            <p>主演：
+                <span v-for="i in item.actors" :key="i.id">{{i.name}}&nbsp;&nbsp;</span>
+            </p>
+        </div>
+
+    </div>
+    <script>
+        new Vue({
+            el: "#app",//挂载点
+            data: {//属性
+                class1: 'red yellow',
+                isRed: true,
+                movies: [
+                    {
+                        id: 1,
+                        color: 'red',
+                        name: "我和我的祖国",
+                        img: "https://dss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=483649607,731107566&fm=26&gp=0.jpg",
+                        director: [
+                            { id: 1, name: "徐峥" },
+                            { id: 2, name: "黄渤" }
+                        ],
+                        actors: [
+                            { id: 1, name: "徐峥" },
+                            { id: 2, name: "黄渤" },
+                            { id: 3, name: "刘昊然" },
+                        ]
+                    },
+                    {
+                        id: 2,
+                        name: "大话西游",
+                        color: 'orange',
+                        img: "https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2651853086,778270490&fm=26&gp=0.jpg",
+                        director: [
+                            { id: 4, name: "刘镇伟" }
+                        ],
+                        actors: [
+                            { id: 5, name: "周星驰" },
+                            { id: 6, name: "朱茵" },
+                        ]
+                    },
+                    {
+                        id: 3,
+                        name: "我和我的家乡",
+                        color: "yellow",
+                        img: "https://dss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=947938482,3261718106&fm=111&gp=0.jpg",
+                        director: [
+                            { id: 1, name: "徐峥" },
+                            { id: 7, name: "宁浩" }
+                        ],
+                        actors: [
+                            { id: 8, name: "徐峥" },
+                            { id: 9, name: "黄渤" },
+                            { id: 10, name: "邓超" },
+                        ]
+                    },
+                    {
+                        id: 4,
+                        color: 'red',
+                        name: "我和我的祖国",
+                        img: "https://dss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=483649607,731107566&fm=26&gp=0.jpg",
+                        director: [
+                            { id: 1, name: "徐峥" },
+                            { id: 2, name: "黄渤" }
+                        ],
+                        actors: [
+                            { id: 1, name: "徐峥" },
+                            { id: 2, name: "黄渤" },
+                            { id: 3, name: "刘昊然" },
+                        ]
+                    },
+                    {
+                        id: 5,
+                        name: "大话西游",
+                        color: 'orange',
+                        img: "https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2651853086,778270490&fm=26&gp=0.jpg",
+                        director: [
+                            { id: 4, name: "刘镇伟" }
+                        ],
+                        actors: [
+                            { id: 5, name: "周星驰" },
+                            { id: 6, name: "朱茵" },
+                        ]
+                    },
+                    {
+                        id: 6,
+                        name: "我和我的家乡",
+                        color: "yellow",
+                        img: "https://dss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=947938482,3261718106&fm=111&gp=0.jpg",
+                        director: [
+                            { id: 1, name: "徐峥" },
+                            { id: 7, name: "宁浩" }
+                        ],
+                        actors: [
+                            { id: 8, name: "徐峥" },
+                            { id: 9, name: "黄渤" },
+                            { id: 10, name: "邓超" },
+                        ]
+                    },
+                ]
+            },
+            methods: {//方法
+                changec(color) {
+                    this.class1 = color + ' yellow';
+                },
+                qiehuan() {
+                    this.isRed = !this.isRed
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

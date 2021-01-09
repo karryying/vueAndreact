@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 1.引入 -->
+    <script src="./node_modules/_vue@2.6.12@vue/dist/vue.js"></script>
+</head>
+<body>
+    <!-- 2.定义一个节点，受vue控制 -->
+    <div>
+        <div id="app">
+            {{1+1}}
+        </div>
+        <div class="app">
+            {{2+2}}
+        </div>
+    </div>
+
+    <script>
+        // 3.实例化vue 
+        new Vue({
+            // 1.el 后面可以写css的所有选择器
+            // 2.一个vue实例只能作用在一个节点上。如果满足el的节点，有好几个，那么也只能作用在满足条件的第一个节点上。
+            // 3、一般情况下使用id
+            // 4.不要将el绑定在html或者body上 Do not mount vue to <html> or <body>
+            // 5.mount 挂载
+
+            el:"div",//挂载点
+        })
+    </script>
+</body>
+</html>

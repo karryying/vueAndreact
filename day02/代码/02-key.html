@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <ul>
+            <!-- vue采用的是“就地更新”原则，所以，我们需要给vue提供一个唯一标识，让vue可以计算出哪些节点发生了改变，需要重新渲染。
+            一般情况下，key绑定的都是id
+            -->
+            <li v-for="(item,index) in movies" :key="item.id">
+                <h3>{{item.name}}</h3>
+                <button @click="changeName(index)">妲己</button>
+                
+            </li>
+        </ul>
+    </div>
+    <script>
+        new Vue({
+            el: "#app",//挂载点
+            data: {//属性
+                movies: [
+                    {
+                        id: 1,
+                        name: "我和我的祖国",
+                        img: "https://dss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=483649607,731107566&fm=26&gp=0.jpg",
+                        director: [
+                            { id: 1, name: "徐峥" },
+                            { id: 2, name: "黄渤" }
+                        ],
+                        actors: [
+                            { id: 1, name: "徐峥" },
+                            { id: 2, name: "黄渤" },
+                            { id: 3, name: "刘昊然" },
+                        ]
+                    },
+                    {
+                        id: 2,
+                        name: "大话西游",
+                        img: "https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2651853086,778270490&fm=26&gp=0.jpg",
+                        director: [
+                            { id: 4, name: "刘镇伟" }
+                        ],
+                        actors: [
+                            { id: 5, name: "周星驰" },
+                            { id: 6, name: "朱茵" },
+                        ]
+                    },
+                    {
+                        id: 3,
+                        name: "我和我的家乡",
+                        img: "https://dss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=947938482,3261718106&fm=111&gp=0.jpg",
+                        director: [
+                            { id: 1, name: "徐峥" },
+                            { id: 7, name: "宁浩" }
+                        ],
+                        actors: [
+                            { id: 8, name: "徐峥" },
+                            { id: 9, name: "黄渤" },
+                            { id: 10, name: "邓超" },
+                        ]
+                    },
+                ]
+            },
+            methods: {//方法
+                changeName(index) {
+                    this.movies[index].name = "妲己"
+                }
+            }
+        })
+
+        
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-show</title>
+    <script src="./node_modules/_vue@2.6.12@vue/dist/vue.js"></script>
+    <style>
+        img{
+            width: 100px;
+            height: 80px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 1.原生js -->
+        <ul> </ul>
+        <hr>
+        <!-- vue  -->
+        <ol>
+            <li v-for="(a,b) in comments">{{a}}---{{b}}</li>
+        </ol>
+
+        <a v-for="(item,index) in website" :href="item.url" :title="item.name">
+            <img :src="item.logo" alt="">
+        </a>
+    </div>
+    <script>
+        let arr = ["物美价廉", "很好", "推荐"]
+
+        // 原生
+        let ul = document.querySelector("ul")
+        for (let i = 0; i < arr.length; i++) {
+            let li = document.createElement("li")
+            li.innerHTML = arr[i]
+            ul.appendChild(li)
+        }
+
+
+        new Vue({
+            el: "#app",
+            data: {
+                comments: arr,
+                website:[
+                    {name:"淘宝",url:"http://taobao.com",logo:"http://img.alicdn.com/tfs/TB11VVdptTfau8jSZFwXXX1mVXa-190-140.gif"},
+                    {name:"京东",url:"http://jd.com",logo:"http://img1.360buyimg.com/da/jfs/t1/32282/27/6770/112552/5c90a8b3Ea193c1af/897d05893a77d649.gif?v=0.9255643030565797"},
+                    {name:"百度",url:"http://baidu.com",logo:"http://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png"},
+                ]
+            },
+
+        })
+    </script>
+</body>
+
+</html>

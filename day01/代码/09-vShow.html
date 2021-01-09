@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-show</title>
+    <script src="./node_modules/_vue@2.6.12@vue/dist/vue.js"></script>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background: green;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h1>v-show</h1>
+        <!-- v-show="值" 值 是true,出现；false,消失 -->
+        <h3 v-show="true">画画的baby，画画的baby</h3>
+
+        <button v-on:click="qiehuan()">切换</button>
+        <div class="box" v-show="isshow"></div>
+    </div>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                isshow: true
+            },
+            methods: {
+                qiehuan() {
+                    this.isshow = !this.isshow
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

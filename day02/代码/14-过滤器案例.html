@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="item in news" :key="item.id">
+                <h3>{{item.title}}</h3>
+                <p>{{item.con}}</p>
+                <p>发布时间：{{item.time|filterTime}}</p>
+            </li>
+        </ul>
+    </div>
+    <script>
+        Vue.filter("filterTime", (time) => {
+            //1607591365717
+            let date = new Date(time);
+            let year=date.getFullYear()
+            let month=(date.getMonth()+1+"").padStart(2,"0")
+            let day=(date.getDate()+'').padStart(2,'0')
+            let hours=(date.getHours()+'').padStart(2,'0')
+            let minutes=(date.getMinutes()+"").padStart(2,'0')
+            let second=(date.getSeconds()+"").padStart(2,"0")
+            return `${year}-${month}-${day} ${hours}:${minutes}:${second}`
+        })
+
+
+        new Vue({
+            el: "#app",//挂载点
+            data: {//属性
+                news: [
+                    {
+                        id: 1,
+                        title: "建设生态文明",
+                        con: "绿水青山就是金山银山",
+                        time: 1607591365717
+                    },
+                    {
+                        id: 2,
+                        title: "香港国安法",
+                        con: "支持香港国安法",
+                        time: 1597591365717
+                    },
+                    {
+                        id: 3,
+                        title: "脱贫攻坚",
+                        con: "土地改革，先富带后富！",
+                        time: 1587591365717
+                    },
+                ]
+            },
+            methods: {//方法
+
+            }
+        })
+    </script>
+</body>
+
+</html>

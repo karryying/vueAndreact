@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id="app" class="container">
+        <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 text-left">账号</div>
+            <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                <div class="form-group">
+                    <input id="my-input" class="form-control" type="text" v-model="user.name">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 text-left">密码</div>
+            <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                <div class="form-group">
+                    <input id="my-input" class="form-control" type="text" v-model="user.pass">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 text-left">确认密码</div>
+            <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                <div class="form-group">
+                    <input id="my-input" class="form-control" type="text" v-model="confirm">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {{user.sex}}
+            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 text-left">性别</div>
+            <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                <div class="form-group">
+                    <!-- 1.对于单选框来说，通过v-model绑定数据，选中的value会赋值给变量 -->
+                    <input id="my-input" @change="cc()" type="radio" name="sex" v-model="user.sex" :value="1">男
+                    <input id="my-input" @change="cc()" type="radio" name="sex" v-model="user.sex" :value="2">女
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 text-left">职业</div>
+            <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                <div class="form-group">
+                    <!-- 2.下拉菜单，也是通过v-model绑定数据，选中的option的value会赋值给绑定的变量 -->
+                    <select class="form-control" v-model="user.job" @change="cc()">
+                        <option value="" disabled>--请选择--</option>
+                        <option v-for="item in jobs" :key="item.id" :value="item.id">{{item.name}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 text-left">零食</div>
+            <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                <div class="form-group">
+                    <!-- 3.对于多选的下拉菜单，首先应该配置multiple，其次，绑定的数据应该是数组 -->
+                    <select class="form-control" v-model="user.snack" multiple @change="cc()">
+                        <option value="" disabled>--请选择--</option>
+                        <option v-for="item in lingShi" :key="item.id" :value="item.id">{{item.name}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 text-left">爱好</div>
+            <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                <div class="form-group">
+                    <!-- 4.对于多选框，如果初始值是数组，那么最后的结果就是数组；只要不是数组，最后都会变成boolean -->
+                    <span v-for="item in aihao" :key="item.id">
+                        <input id="my-input" @change="cc()" type="checkbox" name="sex" :value="item.id"
+                            v-model="user.hobby">{{item.name}}
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 text-left">特殊说明</div>
+            <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                <div class="form-group">
+                    <textarea class="form-control" v-model="user.des" cols="30" rows="10"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 text-left">我同意</div>
+            <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                <div class="form-group">
+                    <input type="checkbox" @change="cc()" v-model="user.isAgree">
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+            <button class="btn btn-primary" @click="submit()">提交</button>
+        </div>
+    </div>
+    <script>
+        /* 情景假设： 后端要求：
+        账号 :name eg:'admin'
+        密码：pass eg:'123'
+        性别：sex eg:1  number  说明：男-1 女-2
+        爱好：hobby eg:[0,2,3] 说明：唱歌-0 跳舞-1 写代码-2 打游戏-3
+        职业：job eg:2   说明：web工程师-1  java工程师-2 php工程师-3 
+        零食：snack eg:[1,2,3] 说明：辣条-1 面包-2 薯片-3 
+        特殊说明：des eg:"嘻嘻嘻哈哈嘿嘿嘿" 
+        我同意：isAgree eg:true  说明：同意-true 不同意-false
+        */
+        new Vue({
+            el: "#app",//挂载点
+            data: {//属性
+                user: {
+                    name: "zhangsan",
+                    pass: "123",
+                    sex: 1,
+                    hobby: [0, 2],
+                    job: 1,
+                    snack: [1, 3],
+                    des: "嘿嘿嘿",
+                    isAgree: true
+                },
+                confirm: "",
+                //模拟职业的数据
+                jobs: [
+                    { id: 1, name: "web工程师" },
+                    { id: 2, name: "php工程师" },
+                    { id: 3, name: "java工程师" },
+                    { id: 4, name: "程序员鼓励师" }
+                ],
+                //零食的模拟数据
+                lingShi: [
+                    { id: 1, name: "辣条" },
+                    { id: 2, name: "面包" },
+                    { id: 3, name: "薯片" }
+                ],
+                //爱好的模拟数据
+                aihao: [
+                    { id: 0, name: "唱歌" },
+                    { id: 1, name: "跳舞" },
+                    { id: 2, name: "写代码" },
+                    { id: 3, name: "打游戏" }
+                ]
+            },
+            methods: {//方法
+                submit() {
+                    if (this.user.pass !== this.confirm) {
+                        alert("两次密码不一致");
+                        return;
+                    }
+                    //ajax this.user
+                    console.log(this.user);
+                },
+                cc() {
+                    console.log("change");
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

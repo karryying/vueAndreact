@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h3>{{tel|filterTel}}</h3>
+        <h3>price:{{price|filterPrice}}</h3>
+    </div>
+    <hr>
+    <div id="app2">
+        <h3>{{tel|filterTel}}</h3>
+
+        <!-- 下面的是错误案例 -->
+        <h3>price:{{price|filterPrice}}</h3>
+    </div>
+    <script>
+        //全局定义：所有的vue实例都可以使用
+        Vue.filter("filterTel",(a)=>{
+            return a.slice(0,3)+"****"+a.slice(7)
+        })
+
+        new Vue({
+            el:"#app",//挂载点
+            data:{//属性
+                tel:'15838382929',
+                price:23.00,
+            
+            },
+            methods:{//方法
+
+            },
+            filters:{
+                //局部定义：只有当前的vue实例都可以使用
+                filterPrice(p){
+                    return p.toFixed(2)
+                },
+
+            }
+        })
+        new Vue({
+            el:"#app2",
+            data:{
+                tel:"15838381919",
+                price:23.9
+            }
+        })
+    </script>
+</body>
+</html>

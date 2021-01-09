@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./node_modules/_vue@2.6.12@vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!--
+        1. v-bind 绑定属性,简写 : 
+        2.v-bind 不仅可以作用在已有的属性上，也可以作用在自定义的属性上
+        -->
+        <img v-bind:src="url" alt="">
+        <a v-bind:href="website.url" v-bind:title="website.name">
+            <img v-bind:src="website.logo" alt="">
+        </a>
+
+        <a :href="website.url" :title="website.name">
+            <img :src="website.logo" alt="" :age="age">
+        </a>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                age:30,
+                url:"https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3153405721,1524067674&fm=26&gp=0.jpg",
+                website:{
+                    name:"淘宝",
+                    url:"http://taobao.com",
+                    logo:"http://img.alicdn.com/tfs/TB11VVdptTfau8jSZFwXXX1mVXa-190-140.gif"
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-model</title>
+    <script src="./node_modules/_vue@2.6.12@vue/dist/vue.js"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <h3>{{name}}</h3>
+        <input type="text" v-model="name">
+        <button @click="getName()">获取name</button>
+
+        <h3>{{age}}</h3>
+        <input type="text" :value="age" @input="fn($event)">
+
+        <input type="checkbox" v-model="obj.checked" @change="fn2($event)">
+    </div>
+    <script>
+        let obj = {};
+        new Vue({
+            el: "#app",
+            data: {
+                name: "妲己",
+                age: 20,
+                obj: {
+
+                }
+            },
+            methods: {
+                fn(e) {
+                    this.age = e.target.value
+                },
+                getName() {
+                    console.log(this.name);
+                },
+                fn2(e) {
+                    console.log(this.obj.checked);
+                    console.log(e);
+                    console.log(e.target.checked);
+                }
+            }
+
+        })
+    </script>
+</body>
+
+</html>

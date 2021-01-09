@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./node_modules/_vue@2.6.12@vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1>模板语法</h1>
+        <!-- 1.非表单元素绑定数据 ，{{}} 模板语法 -->
+        <!-- {{}}外面的按照html解析，{{}}里面需要遵循js的语法，vue解析 -->
+        <h3>{{name}}</h3>
+        <h3>你好，{{name}}</h3>
+        <h3>{{"你好,"+name}}</h3>
+        <h3>{{status==0?'已评价':'未评价'}}</h3>
+        <div>
+            {{str}}
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                name: "澜",
+                // 状态
+                status: 0,//0-已评价 1-未评价
+                str:"<em>这是em标签</em>"
+            },
+            methods: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 1.显示传参：$event ，可以有多个参数 -->
+        <button @click="getEvent($event)">获取event</button>
+
+        <!-- 2.隐式传参：如果调用方法的时候没有写(),默认参数就是event。只能有1个参数 -->
+        <button @click="getEvent">获取event2</button>
+
+        <button @click="getEvent2($event,10)">event ,10</button>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",//挂载点
+            data:{//属性
+
+            },
+            methods:{//方法
+                getEvent(ev){
+                    console.log(ev);
+                },
+                getEvent2(ev,n){
+                    console.log(ev);
+                    console.log(n);
+                }
+            }
+        })
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-show</title>
+    <script src="./node_modules/_vue@2.6.12@vue/dist/vue.js"></script>
+   
+</head>
+
+<body>
+    <div id="app">
+        <button v-on:click="fn()">111</button>
+        <button v-on:click="fn2(3)">3</button>
+        <button v-on:click="fn2(5)">5</button>
+        <button @click="fn2(10)">10</button>
+    </div>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+               
+            },
+            methods:{
+                fn(){
+                    alert(1)
+                },
+                fn2(n){
+                    alert(n)
+                }
+            }
+
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+        
+    </style>
+</head>
+<body>
+    <div id="app" class="container">
+        <div>
+            <h3 class="text-primary text-center">登录1</h3>
+            <div class="form-group">
+                <label for="my-input">账号</label>
+                <input id="my-input" v-model="username" class="form-control" type="text" >
+            </div>
+            <div class="form-group">
+                <label for="my-input">密码</label>
+                <input id="my-input" v-model="userpass" class="form-control" type="text" >
+            </div>
+            <button class="btn btn-primary" @click="login()">登录</button>
+        </div>
+
+        <div>
+            <h3 class="text-primary text-center">登录2</h3>
+            <div class="form-group">
+                <label for="my-input">账号</label>
+                <input id="my-input" v-model="user.name" class="form-control" type="text" >
+            </div>
+            <div class="form-group">
+                <label for="my-input">密码</label>
+                <input id="my-input" v-model="user.pass" class="form-control" type="text" >
+            </div>
+            <button class="btn btn-primary" @click="login2()">登录</button>
+        </div>
+    </div>
+    <script>
+        // 情景假设： 后端要求：账号-name 密码：pass
+        new Vue({
+            el:"#app",//挂载点
+            data:{//属性
+                username:"",
+                userpass:"",
+
+                // 建议定义成一个json,key 专门和后端保持一致 ，方便传参
+                user:{
+                    name:"",
+                    pass:""
+                }
+            },
+            methods:{//方法
+                login(){
+                    console.log(this.username,this.userpass);
+                    //ajax
+                    /*
+                    $.ajax({
+                        url:"",
+                        method:"post",
+                        data:{
+                            name:this.username,
+                            pass:this.userpass
+                        },
+                        success(res){
+
+                        }
+                    })*/
+                },
+                login2(){
+                    console.log(this.user);
+                    /*
+                    $.ajax({
+                        url:"",
+                        method:"post",
+                        data:this.user,
+                        success(res){
+
+                        }
+                    })*/
+                },
+                
+            }
+        })
+    </script>
+</body>
+</html>

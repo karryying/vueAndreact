@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./node_modules/_vue@2.6.12@vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1>v-html</h1>
+        <!-- v- 指令 -->
+        <!-- v-html 中的内容需要遵循js的语法 -->
+        <h3 v-html="name"></h3>
+        <h3 v-html="'你好，'+name">123</h3>
+        <h3 v-html="status==0?'已评价':'未评价'"></h3>
+        <div v-html="str"></div>
+    </div>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                name: "澜",
+                // 状态
+                status: 0,//0-已评价 1-未评价
+                str:"<em>这是em标签</em>"
+            },
+            methods: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>

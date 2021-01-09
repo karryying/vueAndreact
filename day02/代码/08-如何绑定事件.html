@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 1.通过v-on绑定事件，简写为@ -->
+        <button v-on:click="fn()">点击试试</button>
+        <button @click="fn()">点击试试</button>
+        <!-- 2.如果没有参数，()可以省略 -->
+        <button @click="fn">点击试试</button>
+
+        <!-- 3.如果只有一句逻辑，可以直接在html中书写，超过1句，在js中处理 -->
+        <button @click="isshow=!isshow">切换</button>
+        <h3 v-show="isshow">上善若水，水善利万物而不争</h3>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",//挂载点
+            data:{//属性
+                isshow:true
+            },
+            methods:{//方法
+                fn(){
+                    alert(1)
+                }
+            }
+        })
+    </script>
+</body>
+</html>
